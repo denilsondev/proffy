@@ -11,11 +11,14 @@ interface ScheduleItem {
 export default class ClassesController {
 
     async index(request: Request, response: Response) {
+        console.log('========================================================');
         const filters = request.query;
 
         const subject = filters.subject as string;
         const week_day = filters.week_day as string;
         const time = filters.time as string;
+
+        console.log('========================================================', filters);
 
 
         if (!filters.week_day || !filters.subject || !filters.time) {
@@ -30,10 +33,10 @@ export default class ClassesController {
             .whereExists(function () {
                 this.select('class_schedule.*')
                     .from('class_schedule')
-                    .whereRaw('`class_schedule`.`class_id`.`id`')
-                    .whereRaw('`class_schedule`.`week_day`= ??', [Number(week_day)])
-                    .whereRaw('`class_schedule`.`from`<= ??', [timeInMinutes])
-                    .whereRaw('`class_schedule`.`to`> ??', [timeInMinutes]);
+                    .whereRaw('`class_schedule`.`class_id`')
+                    .whereRaw('`class_schedule`.`week_day` = ??', [Number(week_day)])
+                    .whereRaw('`class_schedule`.`from` <= ??', [timeInMinutes])
+                    .whereRaw('`class_schedule`.`to` > ??', [timeInMinutes]);
             })
             .where('classes.subject', '=', subject)
             .join('users', 'classes.user_id', '=', 'users.id')

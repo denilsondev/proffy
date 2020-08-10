@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {Link} fromm 'react-router-dom'
+import { Link } from "react-router-dom";
 import logoImg from "../../assets/images/logo.svg";
 import landingImg from "../../assets/images/landing.svg";
 import studyIcon from "../../assets/images/icons/study.svg";
@@ -38,7 +38,7 @@ function Landing() {
                         <img src={studyIcon} alt="Estudar" />
                         Estudar
                     </Link>
-                    <Link to="/gibe-classes" className="give-classes">
+                    <Link to="/give-classes" className="give-classes">
                         <img src={giveClassIcon} alt="Dar aulas" />
                         Dar aulas
                     </Link>
